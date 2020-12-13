@@ -94,15 +94,15 @@
       </div>
       <div class='wrap-label wrap-label__male'>
         <span>Ваш пол:</span>
-        <span><input name='demand[male]'
+        <span><input name='male'
                      form='form-client'
                      type='radio'
-                     value='male'
+                     value='demand[male]'
                      checked> Мужской</span>
-        <span><input name='demand[female]'
+        <span><input name='male'
                      form='form-client'
                      type="radio"
-                     value='female'> Женский</span>
+                     value='demand[female]'> Женский</span>
       </div>
       <div class='wrap-label'>
         <label>Выберете группы клиентов:
