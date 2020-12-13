@@ -369,7 +369,8 @@ export default {
             case 'clientGroup':
               this.labels[key] = [];
               break;
-            case 'birthday' || 'documentIssure':
+            case 'birthday':
+            case 'documentIssure':
               this.labels[key].day = '';
               this.labels[key].month = 'january';
               this.labels[key].year = '';
