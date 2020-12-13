@@ -14,7 +14,7 @@
         <p v-if='$v.labels.firstName.$dirty && !$v.labels.firstName.required'
            class='form-error'>Это поле обязательно для заполнения.</p>
         <p v-if='$v.labels.firstName.$dirty && !$v.labels.firstName.minLength'
-           class='form-error'>Это поле не должно содержать менее 3 букв.</p>
+           class='form-error'>Это поле не должно содержать менее 2 букв.</p>
       </div>
       <div class='wrap-label'>
         <label>Ваша фамилия: <span class='required'>*</span>
@@ -29,7 +29,7 @@
         <p v-if='$v.labels.secondName.$dirty && !$v.labels.secondName.required'
            class='form-error'>Это поле обязательно для заполнения.</p>
         <p v-if='$v.labels.secondName.$dirty && !$v.labels.secondName.minLength'
-           class='form-error'>Это поле не должно содержать менее 3 букв.</p>
+           class='form-error'>Это поле не должно содержать менее 2 букв.</p>
       </div>
       <div class='wrap-label'>
         <label>Ваше отчество:
@@ -41,7 +41,7 @@
                  placeholder='Введите ваше отчество'>
         </label>
         <p v-if='$v.labels.lastName.$dirty && !$v.labels.lastName.minLength'
-           class='form-error'>Это поле не должно содержать менее 3 букв.</p>
+           class='form-error'>Это поле не должно содержать менее 2 букв.</p>
       </div>
       <div class='wrap-label wrap-label__date'>
         <label>Дата вашего рождения: <span class='required'>*</span></label>
@@ -357,6 +357,27 @@ export default {
       this.$v.labels.$touch();
       if (!this.$v.labels.$error) {
         this.$refs.formClient.reset();
+        this.$v.$reset();
+        Object.keys(this.labels).forEach((key) => {
+          switch (key) {
+            case 'medic':
+              this.labels[key] = 'noSelect';
+              break;
+            case 'documentType':
+              this.labels[key] = 'pasport';
+              break;
+            case 'clientGroup':
+              this.labels[key] = [];
+              break;
+            case 'birthday' || 'documentIssure':
+              this.labels[key].day = '';
+              this.labels[key].month = 'january';
+              this.labels[key].year = '';
+              break;
+            default:
+              this.labels[key] = '';
+          }
+        });
         this.$emit('submitHandler');
       }
     },
@@ -397,14 +418,14 @@ export default {
       labels: {
         firstName: {
           required,
-          minLength: minLength(3),
+          minLength: minLength(2),
         },
         secondName: {
           required,
-          minLength: minLength(3),
+          minLength: minLength(2),
         },
         lastName: {
-          minLength: minLength(3),
+          minLength: minLength(2),
         },
         city: {
           required,
