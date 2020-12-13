@@ -1,5 +1,5 @@
 <template>
-  <form id='form-client' @submit.prevent='submitHandler'>
+  <form ref='formClient' id='form-client' @submit.prevent='submitHandler'>
     <div class="main-information">
       <div class='wrap-label'>
         <label>Ваше имя: <span class='required'>*</span>
@@ -297,7 +297,11 @@
     </div>
     <p><span class='required'>*</span> - Поле обязательное для заполнения.</p>
     <div class='wrap-label'>
-      <button type='submit' class='form-button' form='form-client'>Отправить</button>
+      <button type='submit'
+              :class='["form-button", $v.labels.$error ? "form-button__error" : ""]'
+              form='form-client'>Отправить</button>
+      <p v-if='$v.labels.$error'
+         class='form-error form-error__center'>Форма заполнена некорректно.</p>
     </div>
   </form>
 </template>
@@ -352,6 +356,7 @@ export default {
     submitHandler() {
       this.$v.labels.$touch();
       if (!this.$v.labels.$error) {
+        this.$refs.formClient.reset();
         this.$emit('submitHandler');
       }
     },
@@ -518,9 +523,15 @@ label
     & > select
       width: auto;
 
+      @media (max-width: 860px)
+        width: 100%
+
     & > input
       min-width: 95px;
       width: 18%;
+
+      @media (max-width: 860px)
+        width: 100%
 
   &__sms
     & > label
@@ -535,6 +546,10 @@ label
   text-align: right
   color: darkred
 
+  &__center
+    margin-top: 15px
+    text-align: center
+
 .form-button
   color: #ffffff
   background: #22b2ea
@@ -544,11 +559,18 @@ label
   text-decoration: none
   font-size: 20px
   font-weight: bold
+  outline-style: none
   -webkit-transition-duration: 0.4s /* Safari */
   transition-duration: 0.4s
   user-select: none
 
   &:hover
-    background-color: #4CAF50
+    background-color: darken(#22b2ea, 12.50%)
     color: white
+
+  &__error
+    background-color: #f44336
+
+    &:hover
+      background-color: darken(#f44336, 12.50%)
 </style>

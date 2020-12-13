@@ -26,7 +26,7 @@ export default {
   box-shadow: 0 0 10px rgba(0,0,0,0.5)
   top: 50%
   left: 50%
-  transform: translate(-50%, 0%)
+  transform: translate(-50%, -50%)
   background: white
   height: 150px
   width: 500px
@@ -47,12 +47,13 @@ export default {
     text-decoration: none
     font-size: 18px
     font-weight: bold
+    outline-style: none
     -webkit-transition-duration: 0.4s /* Safari */
     transition-duration: 0.4s
     user-select: none
 
     &:hover
-      background-color: #4CAF50
+      background-color: darken(#22b2ea, 12.50%)
       color: white
 
   @media (max-width: 860px)

@@ -64,4 +64,7 @@ input, textarea, select
   line-height: 1.2
   text-align: center
   padding-bottom: 45px
+
+  @media (max-width: 900px)
+    padding-bottom: 10px
 </style>
