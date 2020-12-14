@@ -1,5 +1,11 @@
 # medods-registration-form
 
+## Description
+
+Registration form to create a new customer.
+
+[Git Pages](https://slambeable.github.io/medods-registration-form/)
+
 ## Project setup
 ```
 npm install
